@@ -20,6 +20,8 @@ function updateDisplay() {
 
 function startTimer() {
     if (timerId === null) {
+        statusText.textContent = 'Alchemizing...';
+        startPauseButton.textContent = 'Pause';
         timerId = setInterval(() => {
             timeLeft--;
             updateDisplay();
@@ -29,11 +31,16 @@ function startTimer() {
                 timerId = null;
                 isWorkTime = !isWorkTime;
                 timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
-                statusText.textContent = isWorkTime ? 'Pomodoro baby!' : 'Break Time';
+                statusText.textContent = isWorkTime ? 'Alchemizing...' : 'Resting';
                 updateDisplay();
                 new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play();
             }
         }, 1000);
+    } else {
+        clearInterval(timerId);
+        timerId = null;
+        startPauseButton.textContent = 'Start';
+        statusText.textContent = 'Resting';
     }
 }
 
@@ -57,8 +64,8 @@ function resetTimer() {
     timerId = null;
     isWorkTime = true;
     timeLeft = WORK_TIME;
-    statusText.textContent = 'Pomodoro baby!';
     startPauseButton.textContent = 'Start';
+    statusText.textContent = 'Resting';
     updateDisplay();
 }
 
@@ -84,14 +91,5 @@ timeLeft = WORK_TIME;
 updateDisplay();
 
 // Event listeners
-startPauseButton.addEventListener('click', () => {
-    if (timerId === null) {
-        startTimer();
-        startPauseButton.textContent = 'Pause';
-    } else {
-        pauseTimer();
-        startPauseButton.textContent = 'Start';
-    }
-});
-
+startPauseButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer); 
