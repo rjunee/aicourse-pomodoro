@@ -12,10 +12,14 @@ body {
 .container {
     text-align: center;
     background-color: #232323;
-    padding: 3rem;
+    padding: 2rem;
+    margin: 1rem;
+    max-width: 90%;
+    width: 400px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
     border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
 }
 
 .timer {
@@ -88,4 +92,46 @@ h1 {
     right: 20px;
     font-size: 1.5rem;
     opacity: 0.5;
+}
+
+.alchemical-symbol {
+    font-size: 2.5rem;
+    margin: 1rem 0 2rem 0;
+    opacity: 0.8;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.alchemical-symbol.spinning {
+    animation: spin 4s linear infinite;
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+        margin: 0.5rem;
+        max-width: 95%;
+    }
+
+    .timer {
+        font-size: 4rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .controls button {
+        padding: 0.6rem 1.2rem;
+        margin: 0 0.3rem;
+    }
 } 

@@ -10,6 +10,7 @@ const secondsDisplay = document.getElementById('seconds');
 const startPauseButton = document.getElementById('startPause');
 const resetButton = document.getElementById('reset');
 const statusText = document.getElementById('status-text');
+const alchemicalSymbol = document.querySelector('.alchemical-symbol');
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -22,6 +23,7 @@ function startTimer() {
     if (timerId === null) {
         statusText.textContent = 'Alchemizing...';
         startPauseButton.textContent = 'Pause';
+        alchemicalSymbol.classList.add('spinning');
         timerId = setInterval(() => {
             timeLeft--;
             updateDisplay();
@@ -41,6 +43,7 @@ function startTimer() {
         timerId = null;
         startPauseButton.textContent = 'Start';
         statusText.textContent = 'Resting';
+        alchemicalSymbol.classList.remove('spinning');
     }
 }
 
@@ -66,6 +69,7 @@ function resetTimer() {
     timeLeft = WORK_TIME;
     startPauseButton.textContent = 'Start';
     statusText.textContent = 'Resting';
+    alchemicalSymbol.classList.remove('spinning');
     updateDisplay();
 }
 
